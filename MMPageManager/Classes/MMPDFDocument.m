@@ -29,10 +29,34 @@ NSString *kPDFDefaultPassword = @"";
 
 - (instancetype)initWithURL:(NSURL *)pdfURL
 {
-    if (self = [super init]) {
-        _urlOnDisk = pdfURL;
+    return [self initWithURL:pdfURL keepOpen:NO];
+}
 
-        _pdfDocument = [[PDFDocument alloc] initWithURL:pdfURL];
+- (instancetype)initWithURL:(NSURL *)pdfURL keepOpen:(BOOL)keepOpen
+{
+    PDFDocument *document = [[PDFDocument alloc] initWithURL:pdfURL];
+
+    if (!document) {
+        return nil;
+    }
+
+    if (self = [self initWithPDFDocument:document]) {
+        if (!keepOpen) {
+            [self closePDF];
+        }
+    }
+    return self;
+}
+
+- (instancetype)initWithPDFDocument:(PDFDocument *)pdfDocument
+{
+    if (self = [super init]) {
+        _urlOnDisk = [pdfDocument documentURL];
+        _pdfDocument = pdfDocument;
+
+        if (!_pdfDocument) {
+            return nil;
+        }
 
         _pageCount = [_pdfDocument pageCount];
         _isEncrypted = [_pdfDocument isEncrypted];
@@ -46,6 +70,7 @@ NSString *kPDFDefaultPassword = @"";
         }
 
         _attributes = [_pdfDocument documentAttributes];
+        _numOpened = 1;
     }
     return self;
 }

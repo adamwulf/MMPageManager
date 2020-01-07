@@ -19,15 +19,16 @@
 // the ppi used for PDF contexts
 + (CGFloat)ppi;
 
+- (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithURL:(NSURL *)url;
-
-- (BOOL)attemptToDecrypt:(NSString *)password;
+- (instancetype)initWithURL:(NSURL *)pdfURL keepOpen:(BOOL)keepOpen;
+- (instancetype)initWithPDFDocument:(PDFDocument *)pdfDocument;
 
 - (BOOL)isEncrypted;
+- (BOOL)attemptToDecrypt:(NSString *)password;
 
 - (PDFDocument *)openPDF;
 - (void)closePDF;
-
 - (void)doWhileOpen:(void (^)(void))block;
 
 @end
