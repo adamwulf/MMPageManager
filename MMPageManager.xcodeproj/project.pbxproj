@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C581396A23C45D7600771D74 /* MMPDFManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C581396823C45D7600771D74 /* MMPDFManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C581396B23C45D7600771D74 /* MMPDFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C581396923C45D7600771D74 /* MMPDFManager.m */; };
 		C5BBB7FE23C45BAB00411906 /* MMPageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C5BBB7FC23C45BAB00411906 /* MMPageManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C581396823C45D7600771D74 /* MMPDFManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPDFManager.h; sourceTree = "<group>"; };
+		C581396923C45D7600771D74 /* MMPDFManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPDFManager.m; sourceTree = "<group>"; };
 		C5BBB7F923C45BAB00411906 /* MMPageManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MMPageManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5BBB7FC23C45BAB00411906 /* MMPageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMPageManager.h; sourceTree = "<group>"; };
 		C5BBB7FD23C45BAB00411906 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -27,6 +31,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C581396323C45CF200771D74 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				C581396823C45D7600771D74 /* MMPDFManager.h */,
+				C581396923C45D7600771D74 /* MMPDFManager.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		C5BBB7EF23C45BAA00411906 = {
 			isa = PBXGroup;
 			children = (
@@ -46,6 +59,7 @@
 		C5BBB7FB23C45BAB00411906 /* MMPageManager */ = {
 			isa = PBXGroup;
 			children = (
+				C581396323C45CF200771D74 /* Classes */,
 				C5BBB7FC23C45BAB00411906 /* MMPageManager.h */,
 				C5BBB7FD23C45BAB00411906 /* Info.plist */,
 			);
@@ -60,6 +74,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5BBB7FE23C45BAB00411906 /* MMPageManager.h in Headers */,
+				C581396A23C45D7600771D74 /* MMPDFManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C581396B23C45D7600771D74 /* MMPDFManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
