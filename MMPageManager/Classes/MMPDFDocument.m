@@ -78,6 +78,23 @@ NSString *kPDFDefaultPassword = @"";
 
 #pragma mark - Properties
 
+- (PDFDocument *)pdfDocument
+{
+    return _pdfDocument;
+}
+
+- (BOOL)isEncrypted
+{
+    return _isEncrypted && !_password;
+}
+
+- (NSString *)title
+{
+    return [_attributes objectForKey:PDFDocumentTitleAttribute];
+}
+
+#pragma mark - Public Methods
+
 - (BOOL)attemptToDecrypt:(NSString *)password
 {
     NSAssert(_pdfDocument != nil, @"PDF document must be open");
@@ -95,17 +112,12 @@ NSString *kPDFDefaultPassword = @"";
     return success;
 }
 
-- (BOOL)isEncrypted
+- (PDFPage *)pageAtIndex:(NSUInteger)index
 {
-    return _isEncrypted && !_password;
+    return [[self pdfDocument] pageAtIndex:index];
 }
 
-- (NSString *)title
-{
-    return [_attributes objectForKey:PDFDocumentTitleAttribute];
-}
-
-#pragma mark - Open and Close
+#pragma mark Open and Close
 
 - (BOOL)openPDF
 {

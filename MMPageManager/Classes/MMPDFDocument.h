@@ -31,4 +31,6 @@
 - (void)closePDF;
 - (void)doWhileOpen:(void (^)(void))block;
 
+- (PDFPage *)pageAtIndex:(NSUInteger)index;
+
 @end

@@ -12,8 +12,6 @@
 		C581397223C45ED100771D74 /* MMPageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C581397023C45ED100771D74 /* MMPageManager.m */; };
 		C581397523C45F6F00771D74 /* MMPDFDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = C581397323C45F6F00771D74 /* MMPDFDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C581397623C45F6F00771D74 /* MMPDFDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = C581397423C45F6F00771D74 /* MMPDFDocument.m */; };
-		C588149223C4608400B281F6 /* MMPDFPage.h in Headers */ = {isa = PBXBuildFile; fileRef = C588149023C4608400B281F6 /* MMPDFPage.h */; };
-		C588149323C4608400B281F6 /* MMPDFPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C588149123C4608400B281F6 /* MMPDFPage.m */; };
 		C59CFBAC23C6DB8300B1635C /* MMPageManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C59CFBAB23C6DB8300B1635C /* MMPageManagerTests.m */; };
 		C59CFBAE23C6DB8300B1635C /* MMPageManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5BBB7F923C45BAB00411906 /* MMPageManager.framework */; };
 		C59CFBB523C6DCED00B1635C /* Normal.pdf in Resources */ = {isa = PBXBuildFile; fileRef = C59CFBB423C6DCED00B1635C /* Normal.pdf */; };
@@ -37,13 +35,12 @@
 		C581397023C45ED100771D74 /* MMPageManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMPageManager.m; sourceTree = "<group>"; };
 		C581397323C45F6F00771D74 /* MMPDFDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPDFDocument.h; sourceTree = "<group>"; };
 		C581397423C45F6F00771D74 /* MMPDFDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPDFDocument.m; sourceTree = "<group>"; };
-		C588149023C4608400B281F6 /* MMPDFPage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMPDFPage.h; sourceTree = "<group>"; };
-		C588149123C4608400B281F6 /* MMPDFPage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMPDFPage.m; sourceTree = "<group>"; };
 		C59CFBA923C6DB8300B1635C /* MMPageManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MMPageManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C59CFBAB23C6DB8300B1635C /* MMPageManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMPageManagerTests.m; sourceTree = "<group>"; };
 		C59CFBAD23C6DB8300B1635C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C59CFBB423C6DCED00B1635C /* Normal.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Normal.pdf; sourceTree = "<group>"; };
 		C59CFBBE23C6E06200B1635C /* Encrypted.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Encrypted.pdf; sourceTree = "<group>"; };
+		C59CFBC023C6E2C600B1635C /* MMPDFDocument+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MMPDFDocument+Private.h"; sourceTree = "<group>"; };
 		C5BBB7F923C45BAB00411906 /* MMPageManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MMPageManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5BBB7FC23C45BAB00411906 /* MMPageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMPageManager.h; sourceTree = "<group>"; };
 		C5BBB7FD23C45BAB00411906 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -75,9 +72,8 @@
 				C581396823C45D7600771D74 /* MMPDFManager.h */,
 				C581396923C45D7600771D74 /* MMPDFManager.m */,
 				C581397323C45F6F00771D74 /* MMPDFDocument.h */,
+				C59CFBC023C6E2C600B1635C /* MMPDFDocument+Private.h */,
 				C581397423C45F6F00771D74 /* MMPDFDocument.m */,
-				C588149023C4608400B281F6 /* MMPDFPage.h */,
-				C588149123C4608400B281F6 /* MMPDFPage.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -130,7 +126,6 @@
 			files = (
 				C581397523C45F6F00771D74 /* MMPDFDocument.h in Headers */,
 				C5BBB7FE23C45BAB00411906 /* MMPageManager.h in Headers */,
-				C588149223C4608400B281F6 /* MMPDFPage.h in Headers */,
 				C581396A23C45D7600771D74 /* MMPDFManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,7 +240,6 @@
 				C581397623C45F6F00771D74 /* MMPDFDocument.m in Sources */,
 				C581397223C45ED100771D74 /* MMPageManager.m in Sources */,
 				C581396B23C45D7600771D74 /* MMPDFManager.m in Sources */,
-				C588149323C4608400B281F6 /* MMPDFPage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
