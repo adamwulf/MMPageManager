@@ -87,6 +87,8 @@ NSString *kPDFDefaultPassword = @"";
         if ([_pdfDocument unlockWithPassword:password]) {
             _password = password;
             _attributes = [_pdfDocument documentAttributes];
+
+            success = YES;
         }
     }
 
@@ -105,12 +107,16 @@ NSString *kPDFDefaultPassword = @"";
 
 #pragma mark - Open and Close
 
-- (PDFDocument *)openPDF
+- (BOOL)openPDF
 {
     @synchronized(self)
     {
         if (!_pdfDocument) {
             _pdfDocument = [[PDFDocument alloc] initWithURL:_urlOnDisk];
+
+            if (!_pdfDocument) {
+                return NO;
+            }
 
             if (_password) {
                 [_pdfDocument unlockWithPassword:_password];
@@ -119,9 +125,8 @@ NSString *kPDFDefaultPassword = @"";
         } else {
             _numOpened += 1;
         }
-
-        return _pdfDocument;
     }
+    return YES;
 }
 
 - (void)closePDF

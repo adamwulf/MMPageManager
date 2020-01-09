@@ -27,7 +27,7 @@
 - (BOOL)isEncrypted;
 - (BOOL)attemptToDecrypt:(NSString *)password;
 
-- (PDFDocument *)openPDF;
+- (BOOL)openPDF;
 - (void)closePDF;
 - (void)doWhileOpen:(void (^)(void))block;
 

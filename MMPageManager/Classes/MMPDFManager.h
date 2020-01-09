@@ -13,13 +13,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 extern CGFloat const PDFPPI;
 
+@class MMPDFDocument;
+
 
 @interface MMPDFManager : NSObject
 
 + (instancetype)sharedManager;
 - (instancetype)init NS_UNAVAILABLE;
 
-- (PDFDocument *)pdfDocumentForURL:(NSURL *)pdfURL;
+- (MMPDFDocument *)pdfDocumentForURL:(NSURL *)pdfURL;
 
 @end
 

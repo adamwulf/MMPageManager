@@ -7,13 +7,14 @@
 //
 
 #import "MMPDFManager.h"
+#import "MMPDFDocument.h"
 
 CGFloat const PDFPPI = 72;
 
 
 @interface MMPDFManager ()
 
-@property(nonatomic, strong, readonly) NSMutableDictionary<NSURL *, PDFDocument *> *openPDFs;
+@property(nonatomic, strong, readonly) NSMutableDictionary<NSURL *, MMPDFDocument *> *cachedPDFs;
 
 @end
 
@@ -33,18 +34,21 @@ CGFloat const PDFPPI = 72;
 - (instancetype)init
 {
     if (self = [super init]) {
-        _openPDFs = [NSMutableDictionary dictionary];
+        _cachedPDFs = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
-- (PDFDocument *)pdfDocumentForURL:(NSURL *)pdfURL
+- (MMPDFDocument *)pdfDocumentForURL:(NSURL *)pdfURL
 {
-    PDFDocument *doc = _openPDFs[pdfURL];
+    MMPDFDocument *doc = _cachedPDFs[pdfURL];
 
     if (!doc) {
-        doc = [[PDFDocument alloc] initWithURL:pdfURL];
-        _openPDFs[pdfURL] = doc;
+        doc = [[MMPDFDocument alloc] initWithURL:pdfURL];
+
+        if (doc) {
+            _cachedPDFs[pdfURL] = doc;
+        }
     }
 
     return doc;

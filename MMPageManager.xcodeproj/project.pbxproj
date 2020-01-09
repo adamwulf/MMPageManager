@@ -14,8 +14,22 @@
 		C581397623C45F6F00771D74 /* MMPDFDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = C581397423C45F6F00771D74 /* MMPDFDocument.m */; };
 		C588149223C4608400B281F6 /* MMPDFPage.h in Headers */ = {isa = PBXBuildFile; fileRef = C588149023C4608400B281F6 /* MMPDFPage.h */; };
 		C588149323C4608400B281F6 /* MMPDFPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C588149123C4608400B281F6 /* MMPDFPage.m */; };
+		C59CFBAC23C6DB8300B1635C /* MMPageManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C59CFBAB23C6DB8300B1635C /* MMPageManagerTests.m */; };
+		C59CFBAE23C6DB8300B1635C /* MMPageManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5BBB7F923C45BAB00411906 /* MMPageManager.framework */; };
+		C59CFBB523C6DCED00B1635C /* Normal.pdf in Resources */ = {isa = PBXBuildFile; fileRef = C59CFBB423C6DCED00B1635C /* Normal.pdf */; };
+		C59CFBBF23C6E06200B1635C /* Encrypted.pdf in Resources */ = {isa = PBXBuildFile; fileRef = C59CFBBE23C6E06200B1635C /* Encrypted.pdf */; };
 		C5BBB7FE23C45BAB00411906 /* MMPageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C5BBB7FC23C45BAB00411906 /* MMPageManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C59CFBAF23C6DB8300B1635C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5BBB7F023C45BAA00411906 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C5BBB7F823C45BAB00411906;
+			remoteInfo = MMPageManager;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		C581396823C45D7600771D74 /* MMPDFManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPDFManager.h; sourceTree = "<group>"; };
@@ -25,12 +39,25 @@
 		C581397423C45F6F00771D74 /* MMPDFDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPDFDocument.m; sourceTree = "<group>"; };
 		C588149023C4608400B281F6 /* MMPDFPage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMPDFPage.h; sourceTree = "<group>"; };
 		C588149123C4608400B281F6 /* MMPDFPage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMPDFPage.m; sourceTree = "<group>"; };
+		C59CFBA923C6DB8300B1635C /* MMPageManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MMPageManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C59CFBAB23C6DB8300B1635C /* MMPageManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMPageManagerTests.m; sourceTree = "<group>"; };
+		C59CFBAD23C6DB8300B1635C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C59CFBB423C6DCED00B1635C /* Normal.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Normal.pdf; sourceTree = "<group>"; };
+		C59CFBBE23C6E06200B1635C /* Encrypted.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Encrypted.pdf; sourceTree = "<group>"; };
 		C5BBB7F923C45BAB00411906 /* MMPageManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MMPageManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5BBB7FC23C45BAB00411906 /* MMPageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMPageManager.h; sourceTree = "<group>"; };
 		C5BBB7FD23C45BAB00411906 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C59CFBA623C6DB8300B1635C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C59CFBAE23C6DB8300B1635C /* MMPageManager.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C5BBB7F623C45BAB00411906 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -55,10 +82,22 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		C59CFBAA23C6DB8300B1635C /* MMPageManagerTests */ = {
+			isa = PBXGroup;
+			children = (
+				C59CFBB423C6DCED00B1635C /* Normal.pdf */,
+				C59CFBBE23C6E06200B1635C /* Encrypted.pdf */,
+				C59CFBAB23C6DB8300B1635C /* MMPageManagerTests.m */,
+				C59CFBAD23C6DB8300B1635C /* Info.plist */,
+			);
+			path = MMPageManagerTests;
+			sourceTree = "<group>";
+		};
 		C5BBB7EF23C45BAA00411906 = {
 			isa = PBXGroup;
 			children = (
 				C5BBB7FB23C45BAB00411906 /* MMPageManager */,
+				C59CFBAA23C6DB8300B1635C /* MMPageManagerTests */,
 				C5BBB7FA23C45BAB00411906 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -67,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				C5BBB7F923C45BAB00411906 /* MMPageManager.framework */,
+				C59CFBA923C6DB8300B1635C /* MMPageManagerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,6 +138,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		C59CFBA823C6DB8300B1635C /* MMPageManagerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C59CFBB323C6DB8400B1635C /* Build configuration list for PBXNativeTarget "MMPageManagerTests" */;
+			buildPhases = (
+				C59CFBA523C6DB8300B1635C /* Sources */,
+				C59CFBA623C6DB8300B1635C /* Frameworks */,
+				C59CFBA723C6DB8300B1635C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C59CFBB023C6DB8300B1635C /* PBXTargetDependency */,
+			);
+			name = MMPageManagerTests;
+			productName = MMPageManagerTests;
+			productReference = C59CFBA923C6DB8300B1635C /* MMPageManagerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		C5BBB7F823C45BAB00411906 /* MMPageManager */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C5BBB80123C45BAB00411906 /* Build configuration list for PBXNativeTarget "MMPageManager" */;
@@ -125,6 +183,9 @@
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Milestone Made";
 				TargetAttributes = {
+					C59CFBA823C6DB8300B1635C = {
+						CreatedOnToolsVersion = 11.3;
+					};
 					C5BBB7F823C45BAB00411906 = {
 						CreatedOnToolsVersion = 11.3;
 					};
@@ -144,11 +205,21 @@
 			projectRoot = "";
 			targets = (
 				C5BBB7F823C45BAB00411906 /* MMPageManager */,
+				C59CFBA823C6DB8300B1635C /* MMPageManagerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C59CFBA723C6DB8300B1635C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C59CFBB523C6DCED00B1635C /* Normal.pdf in Resources */,
+				C59CFBBF23C6E06200B1635C /* Encrypted.pdf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C5BBB7F723C45BAB00411906 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -159,6 +230,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C59CFBA523C6DB8300B1635C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C59CFBAC23C6DB8300B1635C /* MMPageManagerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C5BBB7F523C45BAB00411906 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -172,7 +251,49 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		C59CFBB023C6DB8300B1635C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C5BBB7F823C45BAB00411906 /* MMPageManager */;
+			targetProxy = C59CFBAF23C6DB8300B1635C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		C59CFBB123C6DB8300B1635C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MU27A4SCKC;
+				INFOPLIST_FILE = MMPageManagerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.milestonemade.MMPageManagerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C59CFBB223C6DB8300B1635C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MU27A4SCKC;
+				INFOPLIST_FILE = MMPageManagerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.milestonemade.MMPageManagerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		C5BBB7FF23C45BAB00411906 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -338,6 +459,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C59CFBB323C6DB8400B1635C /* Build configuration list for PBXNativeTarget "MMPageManagerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C59CFBB123C6DB8300B1635C /* Debug */,
+				C59CFBB223C6DB8300B1635C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C5BBB7F323C45BAA00411906 /* Build configuration list for PBXProject "MMPageManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
