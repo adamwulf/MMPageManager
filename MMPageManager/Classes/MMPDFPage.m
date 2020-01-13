@@ -60,7 +60,7 @@
 - (UIImage *)thumbnail
 {
     if (!_thumbnail) {
-        _thumbnail = [[self pdfPage] thumbnailOfSize:[self idealSize] forBox:kPDFDisplayBoxMediaBox];
+        _thumbnail = [[self pdfPage] thumbnailOfSize:CGSizeMake(300, 300) forBox:kPDFDisplayBoxMediaBox];
     }
     return _thumbnail;
 }
