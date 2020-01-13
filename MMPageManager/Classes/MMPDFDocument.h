@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <PDFKit/PDFKit.h>
 
+@class MMPDFPage;
+
 
 @interface MMPDFDocument : NSObject
 
@@ -31,6 +33,6 @@
 - (void)closePDF;
 - (void)doWhileOpen:(void (^)(void))block;
 
-- (PDFPage *)pageAtIndex:(NSUInteger)index;
+- (MMPDFPage *)pageAtIndex:(NSUInteger)index;
 
 @end

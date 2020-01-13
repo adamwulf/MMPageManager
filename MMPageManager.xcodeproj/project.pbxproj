@@ -17,7 +17,7 @@
 		C59CFBB523C6DCED00B1635C /* Normal.pdf in Resources */ = {isa = PBXBuildFile; fileRef = C59CFBB423C6DCED00B1635C /* Normal.pdf */; };
 		C59CFBBF23C6E06200B1635C /* Encrypted.pdf in Resources */ = {isa = PBXBuildFile; fileRef = C59CFBBE23C6E06200B1635C /* Encrypted.pdf */; };
 		C5BBB7FE23C45BAB00411906 /* MMPageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C5BBB7FC23C45BAB00411906 /* MMPageManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C5F48B8C23CD90C1006DF443 /* MMPDFPage.h in Headers */ = {isa = PBXBuildFile; fileRef = C5F48B8A23CD90C1006DF443 /* MMPDFPage.h */; };
+		C5F48B8C23CD90C1006DF443 /* MMPDFPage.h in Headers */ = {isa = PBXBuildFile; fileRef = C5F48B8A23CD90C1006DF443 /* MMPDFPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C5F48B8D23CD90C1006DF443 /* MMPDFPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F48B8B23CD90C1006DF443 /* MMPDFPage.m */; };
 /* End PBXBuildFile section */
 

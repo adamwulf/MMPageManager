@@ -16,6 +16,8 @@
 
 - (instancetype)initWithPDFPage:(PDFPage *)pdfPage
 {
+    NSAssert(pdfPage != nil, @"Must have valid page");
+
     if (self = [super init]) {
         _pdfPage = pdfPage;
 

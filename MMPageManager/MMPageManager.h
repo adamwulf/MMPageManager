@@ -30,3 +30,4 @@ NS_ASSUME_NONNULL_END
 
 #import <MMPageManager/MMPDFManager.h>
 #import <MMPageManager/MMPDFDocument.h>
+#import <MMPageManager/MMPDFPage.h>

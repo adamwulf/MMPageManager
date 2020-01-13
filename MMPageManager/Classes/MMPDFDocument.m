@@ -7,6 +7,7 @@
 //
 
 #import "MMPDFDocument.h"
+#import "MMPDFPage.h"
 
 NSString *kPDFDefaultPassword = @"";
 
@@ -112,9 +113,9 @@ NSString *kPDFDefaultPassword = @"";
     return success;
 }
 
-- (PDFPage *)pageAtIndex:(NSUInteger)index
+- (MMPDFPage *)pageAtIndex:(NSUInteger)index
 {
-    return [[self pdfDocument] pageAtIndex:index];
+    return [[MMPDFPage alloc] initWithPDFPage:[[self pdfDocument] pageAtIndex:index]];
 }
 
 #pragma mark Open and Close
