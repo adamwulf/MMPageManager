@@ -59,4 +59,48 @@
     }];
 }
 
+- (void)testNewPDFPage
+{
+    NSString *tmp = NSTemporaryDirectory();
+    NSURL *tmpURL = [[NSURL fileURLWithPath:tmp] URLByAppendingPathComponent:@"temp.pdf"];
+
+    PDFDocument *doc = [[PDFDocument alloc] init];
+
+    XCTAssertEqual([doc pageCount], 0);
+
+    [doc insertPage:[[PDFPage alloc] init] atIndex:0];
+
+    XCTAssertEqual([doc pageCount], 1);
+
+    [[doc pageAtIndex:0] setBounds:CGRectMake(0, 0, 72, 72) forBox:kPDFDisplayBoxMediaBox];
+
+    PDFAnnotation *annotation = [[PDFAnnotation alloc] initWithBounds:CGRectMake(0, 0, 72, 72) forType:PDFAnnotationSubtypeInk withProperties:nil];
+    PDFBorder *border = [[PDFBorder alloc] init];
+    [border setLineWidth:4];
+
+    [annotation addBezierPath:[UIBezierPath bezierPathWithOvalInRect:CGRectMake(10, 10, 20, 20)]];
+    [annotation setColor:[UIColor redColor]];
+    [annotation setBorder:border];
+
+    [[doc pageAtIndex:0] addAnnotation:annotation];
+
+    [doc writeToURL:tmpURL];
+}
+
+- (void)testEmptyPDF
+{
+    NSString *tmp = NSTemporaryDirectory();
+    NSURL *tmpURL = [[NSURL fileURLWithPath:tmp] URLByAppendingPathComponent:@"temp.pdf"];
+
+    PDFDocument *doc = [[PDFDocument alloc] init];
+
+    XCTAssertEqual([doc pageCount], 0);
+
+    [doc writeToURL:tmpURL];
+
+    doc = [[PDFDocument alloc] initWithURL:tmpURL];
+
+    XCTAssertEqual([doc pageCount], 0);
+}
+
 @end
