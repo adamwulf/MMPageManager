@@ -59,34 +59,6 @@
     }];
 }
 
-- (void)testNewPDFPage
-{
-    NSString *tmp = NSTemporaryDirectory();
-    NSURL *tmpURL = [[NSURL fileURLWithPath:tmp] URLByAppendingPathComponent:@"temp.pdf"];
-
-    PDFDocument *doc = [[PDFDocument alloc] init];
-
-    XCTAssertEqual([doc pageCount], 0);
-
-    [doc insertPage:[[PDFPage alloc] init] atIndex:0];
-
-    XCTAssertEqual([doc pageCount], 1);
-
-    [[doc pageAtIndex:0] setBounds:CGRectMake(0, 0, 72, 72) forBox:kPDFDisplayBoxMediaBox];
-
-    PDFAnnotation *annotation = [[PDFAnnotation alloc] initWithBounds:CGRectMake(0, 0, 72, 72) forType:PDFAnnotationSubtypeInk withProperties:nil];
-    PDFBorder *border = [[PDFBorder alloc] init];
-    [border setLineWidth:4];
-
-    [annotation addBezierPath:[UIBezierPath bezierPathWithOvalInRect:CGRectMake(10, 10, 20, 20)]];
-    [annotation setColor:[UIColor redColor]];
-    [annotation setBorder:border];
-
-    [[doc pageAtIndex:0] addAnnotation:annotation];
-
-    [doc writeToURL:tmpURL];
-}
-
 - (void)testEmptyPDF
 {
     NSString *tmp = NSTemporaryDirectory();
@@ -100,7 +72,51 @@
 
     doc = [[PDFDocument alloc] initWithURL:tmpURL];
 
-    XCTAssertEqual([doc pageCount], 0);
+    XCTAssertEqual([doc pageCount], 1);
+}
+
+// The following test uses a page from a first PDF document
+// and duplicates it into a second PDF as 2 additional pages.
+// all changes to that page affect both new pages in the new pdf
+- (void)testSharingSinglePDFPage
+{
+    NSString *tmp = NSTemporaryDirectory();
+    NSURL *tmpURL = [[NSURL fileURLWithPath:tmp] URLByAppendingPathComponent:@"temp.pdf"];
+
+    PDFDocument *doc = [[PDFDocument alloc] init];
+    PDFPage *page = [[PDFPage alloc] init];
+
+    [page setBounds:CGRectMake(0, 0, 72, 72) forBox:kPDFDisplayBoxMediaBox];
+
+    [doc insertPage:page atIndex:0];
+
+    XCTAssertEqual([doc pageCount], 1);
+
+    [doc writeToURL:tmpURL];
+
+    doc = [[PDFDocument alloc] initWithURL:tmpURL];
+
+    page = [[doc pageAtIndex:0] copy];
+
+    PDFDocument *doc2 = [[PDFDocument alloc] init];
+
+    [doc2 insertPage:page atIndex:0];
+    [doc2 insertPage:page atIndex:1];
+
+    PDFAnnotation *annotation = [[PDFAnnotation alloc] initWithBounds:CGRectMake(0, 0, 72, 72) forType:PDFAnnotationSubtypeInk withProperties:nil];
+    PDFBorder *border = [[PDFBorder alloc] init];
+    [border setLineWidth:4];
+
+    [annotation addBezierPath:[UIBezierPath bezierPathWithOvalInRect:CGRectMake(10, 10, 20, 20)]];
+    [annotation setColor:[UIColor redColor]];
+    [annotation setBorder:border];
+
+    [page addAnnotation:annotation];
+
+    XCTAssertEqual([doc pageCount], 1);
+    XCTAssertEqual([doc2 pageCount], 2);
+
+    [doc2 writeToURL:tmpURL];
 }
 
 @end
