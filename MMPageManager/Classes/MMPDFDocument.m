@@ -62,7 +62,7 @@ NSString *const MMPDFDocumentDidCloseNotification = @"MMPDFDocumentDidCloseNotif
         _pdfDocument = pdfDocument;
         _pages = [NSMutableDictionary dictionary];
         _pdfQueue = [[NSOperationQueue alloc] init];
-        [_pdfQueue setMaxConcurrentOperationCount:4];
+        [_pdfQueue setMaxConcurrentOperationCount:8];
 
         if (!_pdfDocument) {
             return nil;
