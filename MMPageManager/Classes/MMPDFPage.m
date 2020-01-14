@@ -68,21 +68,28 @@ NSString *const MMPDFPageDidGenerateThumbnail = @"MMPDFPageDidGenerateThumbnail"
 - (UIImage *)thumbnail
 {
     if (!_thumbnail) {
-        typeof(self) __weak weakSelf = self;
-
-        [[[self document] pdfQueue] addOperationWithBlock:^{
-            MMPDFPage *strongSelf = weakSelf;
-
-            if (!strongSelf->_thumbnail) {
-                strongSelf->_thumbnail = [[strongSelf pdfPage] thumbnailOfSize:CGSizeMake(300, 300) forBox:kPDFDisplayBoxMediaBox];
-            }
-
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:MMPDFPageDidGenerateThumbnail object:strongSelf];
-            });
-        }];
+        [self generateThumbnail];
     }
     return _thumbnail;
+}
+
+#pragma mark - Private
+
+- (void)generateThumbnail
+{
+    typeof(self) __weak weakSelf = self;
+
+    [[[self document] pdfQueue] addOperationWithBlock:^{
+        MMPDFPage *strongSelf = weakSelf;
+
+        if (!strongSelf->_thumbnail) {
+            strongSelf->_thumbnail = [[strongSelf pdfPage] thumbnailOfSize:CGSizeMake(300, 300) forBox:kPDFDisplayBoxMediaBox];
+        }
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:MMPDFPageDidGenerateThumbnail object:strongSelf];
+        });
+    }];
 }
 
 @end
