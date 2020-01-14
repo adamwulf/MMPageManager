@@ -119,4 +119,103 @@
     [doc2 writeToURL:tmpURL];
 }
 
+- (void)testAddingPageMultipleTimes
+{
+    // Adding the same page to the same document multiple times is allowed
+
+    PDFDocument *doc = [[PDFDocument alloc] init];
+    PDFPage *page = [[PDFPage alloc] init];
+
+    [doc insertPage:page atIndex:[doc pageCount]];
+
+    XCTAssertEqual([doc pageCount], 1);
+
+    [doc insertPage:page atIndex:[doc pageCount]];
+
+    XCTAssertEqual([doc pageCount], 2);
+}
+
+- (void)testMovingPageToNewDocumentUnsafe
+{
+    // Adding the same page to the same document multiple times is allowed
+
+    PDFDocument *doc1 = [[PDFDocument alloc] init];
+    PDFPage *page = [[PDFPage alloc] init];
+
+    [doc1 insertPage:page atIndex:[doc1 pageCount]];
+
+    XCTAssertEqual([doc1 pageCount], 1);
+    XCTAssertEqual([page document], doc1);
+
+    PDFDocument *doc2 = [[PDFDocument alloc] init];
+
+    [doc2 insertPage:page atIndex:[doc2 pageCount]];
+
+    XCTAssertEqual([doc1 pageCount], 1);
+    XCTAssertEqual([doc2 pageCount], 1);
+    XCTAssertEqual([page document], doc2);
+
+    // !!
+    // The document property of a page object is whatever document it's
+    // been added to most recently. If a page has been added to multiple
+    // documents, then it retains the most recent document
+    PDFPage *pageFromDoc1 = [doc1 pageAtIndex:0];
+
+    XCTAssertEqual([pageFromDoc1 document], doc2);
+}
+
+- (void)testMovingPageToNewDocumentSafe
+{
+    // Adding the same page to the same document multiple times is allowed
+
+    PDFDocument *doc1 = [[PDFDocument alloc] init];
+    PDFPage *page1 = [[PDFPage alloc] init];
+
+    [doc1 insertPage:page1 atIndex:[doc1 pageCount]];
+
+    XCTAssertEqual([doc1 pageCount], 1);
+    XCTAssertEqual([page1 document], doc1);
+
+    PDFDocument *doc2 = [[PDFDocument alloc] init];
+    // !!
+    // Whenever moving a page between documents, always copy the PDFPage ref
+    // so that the original document's page isn't messed up
+    PDFPage *page2 = [page1 copy];
+
+    [doc2 insertPage:page2 atIndex:[doc2 pageCount]];
+
+    XCTAssertEqual([doc1 pageCount], 1);
+    XCTAssertEqual([doc2 pageCount], 1);
+    XCTAssertEqual([page2 document], doc2);
+    XCTAssertEqual([page1 document], doc1);
+
+    PDFPage *pageFromDoc1 = [doc1 pageAtIndex:0];
+
+    XCTAssertEqual([pageFromDoc1 document], doc1);
+}
+
+- (void)testRemovePage
+{
+    // Adding the same page to the same document multiple times is allowed
+
+    PDFDocument *doc1 = [[PDFDocument alloc] init];
+    PDFPage *page1 = [[PDFPage alloc] init];
+
+    [doc1 insertPage:page1 atIndex:[doc1 pageCount]];
+
+    XCTAssertEqual([doc1 pageCount], 1);
+    XCTAssertEqual([page1 document], doc1);
+
+    // Removing a page from a document will NULL its document ref
+    [doc1 removePageAtIndex:0];
+
+    XCTAssertEqual([doc1 pageCount], 0);
+    XCTAssertEqual([page1 document], NULL);
+
+    [doc1 insertPage:page1 atIndex:[doc1 pageCount]];
+
+    XCTAssertEqual([doc1 pageCount], 1);
+    XCTAssertEqual([page1 document], doc1);
+}
+
 @end
