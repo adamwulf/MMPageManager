@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString *const MMPDFPageDidGenerateThumbnail;
+extern NSString *const MMPDFPageDidGenerateThumbnailNotification;
 
 @class MMPDFDocument;
 

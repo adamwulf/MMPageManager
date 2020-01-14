@@ -11,6 +11,9 @@
 
 @class MMPDFPage;
 
+extern NSString *const MMPDFDocumentDidOpenNotification;
+extern NSString *const MMPDFDocumentDidCloseNotification;
+
 
 @interface MMPDFDocument : NSObject
 

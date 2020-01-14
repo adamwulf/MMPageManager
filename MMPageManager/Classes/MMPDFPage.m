@@ -10,7 +10,7 @@
 #import "MMPDFDocument.h"
 #import "MMPDFDocument+Private.h"
 
-NSString *const MMPDFPageDidGenerateThumbnail = @"MMPDFPageDidGenerateThumbnail";
+NSString *const MMPDFPageDidGenerateThumbnailNotification = @"MMPDFPageDidGenerateThumbnail";
 
 
 @implementation MMPDFPage {
@@ -82,12 +82,14 @@ NSString *const MMPDFPageDidGenerateThumbnail = @"MMPDFPageDidGenerateThumbnail"
     [[[self document] pdfQueue] addOperationWithBlock:^{
         MMPDFPage *strongSelf = weakSelf;
 
-        if (!strongSelf->_thumbnail) {
-            strongSelf->_thumbnail = [[strongSelf pdfPage] thumbnailOfSize:CGSizeMake(300, 300) forBox:kPDFDisplayBoxMediaBox];
-        }
+        [[self document] doWhileOpen:^{
+            if (!strongSelf->_thumbnail) {
+                strongSelf->_thumbnail = [[strongSelf pdfPage] thumbnailOfSize:CGSizeMake(300, 300) forBox:kPDFDisplayBoxMediaBox];
+            }
+        }];
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:MMPDFPageDidGenerateThumbnail object:strongSelf];
+            [[NSNotificationCenter defaultCenter] postNotificationName:MMPDFPageDidGenerateThumbnailNotification object:strongSelf];
         });
     }];
 }

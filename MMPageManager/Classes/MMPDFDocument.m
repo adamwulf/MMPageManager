@@ -12,6 +12,9 @@
 
 NSString *kPDFDefaultPassword = @"";
 
+NSString *const MMPDFDocumentDidOpenNotification = @"MMPDFDocumentDidOpenNotification";
+NSString *const MMPDFDocumentDidCloseNotification = @"MMPDFDocumentDidCloseNotification";
+
 
 @implementation MMPDFDocument {
     BOOL _isEncrypted;
@@ -19,6 +22,7 @@ NSString *kPDFDefaultPassword = @"";
     NSInteger _numOpened;
     NSDictionary<PDFDocumentAttribute, id> *_attributes;
     NSMutableDictionary<NSNumber *, MMPDFPage *> *_pages;
+    NSObject *_pdfOpenLock;
 }
 
 @synthesize pageCount = _pageCount;
@@ -53,6 +57,7 @@ NSString *kPDFDefaultPassword = @"";
 - (instancetype)initWithPDFDocument:(PDFDocument *)pdfDocument
 {
     if (self = [super init]) {
+        _pdfOpenLock = [[NSObject alloc] init];
         _urlOnDisk = [pdfDocument documentURL];
         _pdfDocument = pdfDocument;
         _pages = [NSMutableDictionary dictionary];
@@ -76,6 +81,11 @@ NSString *kPDFDefaultPassword = @"";
 
         _attributes = [_pdfDocument documentAttributes];
         _numOpened = 1;
+
+        // initialize all pages
+        for (NSInteger index = 0; index < [self pageCount]; index++) {
+            [self pageAtIndex:index];
+        }
     }
     return self;
 }
@@ -131,7 +141,7 @@ NSString *kPDFDefaultPassword = @"";
 
 - (BOOL)openPDF
 {
-    @synchronized(self)
+    @synchronized(_pdfOpenLock)
     {
         if (!_pdfDocument) {
             _pdfDocument = [[PDFDocument alloc] initWithURL:_urlOnDisk];
@@ -144,6 +154,8 @@ NSString *kPDFDefaultPassword = @"";
                 [_pdfDocument unlockWithPassword:_password];
             }
             _numOpened = 1;
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:MMPDFDocumentDidOpenNotification object:self];
         } else {
             _numOpened += 1;
         }
@@ -153,12 +165,14 @@ NSString *kPDFDefaultPassword = @"";
 
 - (void)closePDF
 {
-    @synchronized(self)
+    @synchronized(_pdfOpenLock)
     {
         _numOpened -= 1;
 
         if (_numOpened == 0) {
             _pdfDocument = nil;
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:MMPDFDocumentDidCloseNotification object:self];
         }
     }
 }
