@@ -7,6 +7,7 @@
 //
 
 #import "MMPDFDocument.h"
+#import "MMPDFDocument+Private.h"
 #import "MMPDFPage.h"
 
 NSString *kPDFDefaultPassword = @"";
@@ -15,9 +16,9 @@ NSString *kPDFDefaultPassword = @"";
 @implementation MMPDFDocument {
     BOOL _isEncrypted;
     NSString *_password;
-    PDFDocument *_pdfDocument;
     NSInteger _numOpened;
     NSDictionary<PDFDocumentAttribute, id> *_attributes;
+    NSMutableDictionary<NSNumber *, MMPDFPage *> *_pages;
 }
 
 @synthesize pageCount = _pageCount;
@@ -54,6 +55,9 @@ NSString *kPDFDefaultPassword = @"";
     if (self = [super init]) {
         _urlOnDisk = [pdfDocument documentURL];
         _pdfDocument = pdfDocument;
+        _pages = [NSMutableDictionary dictionary];
+        _pdfQueue = [[NSOperationQueue alloc] init];
+        [_pdfQueue setMaxConcurrentOperationCount:4];
 
         if (!_pdfDocument) {
             return nil;
@@ -78,11 +82,6 @@ NSString *kPDFDefaultPassword = @"";
 
 
 #pragma mark - Properties
-
-- (PDFDocument *)pdfDocument
-{
-    return _pdfDocument;
-}
 
 - (BOOL)isEncrypted
 {
@@ -115,7 +114,17 @@ NSString *kPDFDefaultPassword = @"";
 
 - (MMPDFPage *)pageAtIndex:(NSUInteger)index
 {
-    return [[MMPDFPage alloc] initWithPDFPage:[[self pdfDocument] pageAtIndex:index]];
+    MMPDFPage *page = [_pages objectForKey:@(index)];
+
+    if (!page) {
+        PDFPage *pdfPage = [[self pdfDocument] pageAtIndex:index];
+
+        page = [[MMPDFPage alloc] initWithPDFPage:pdfPage document:self];
+
+        [_pages setObject:page forKey:@(index)];
+    }
+
+    return page;
 }
 
 #pragma mark Open and Close

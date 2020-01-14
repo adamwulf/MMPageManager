@@ -11,6 +11,7 @@
 
 @interface MMPDFDocument ()
 
-- (PDFDocument *)pdfDocument;
+@property(nonatomic, strong, readonly) PDFDocument *pdfDocument;
+@property(nonatomic, strong, readonly) NSOperationQueue *pdfQueue;
 
 @end

@@ -9,17 +9,22 @@
 #import <Foundation/Foundation.h>
 #import <PDFKit/PDFKit.h>
 
-
 NS_ASSUME_NONNULL_BEGIN
+
+extern NSString *const MMPDFPageDidGenerateThumbnail;
+
+@class MMPDFDocument;
 
 
 @interface MMPDFPage : NSObject
 
-- (instancetype)initWithPDFPage:(PDFPage *)pdfPage;
+- (instancetype)initWithPDFPage:(PDFPage *)pdfPage document:(MMPDFDocument *)document;
 
-@property(nonatomic, readonly) CGFloat heightRatio;
-@property(nonatomic, readonly) CGFloat pointWidth;
-@property(nonatomic, readonly) CGSize idealSize;
+@property(nonatomic, weak, readonly) MMPDFDocument *document;
+@property(nonatomic, assign, readonly) NSUInteger pageIndex;
+@property(nonatomic, assign, readonly) CGFloat heightRatio;
+@property(nonatomic, assign, readonly) CGFloat pointWidth;
+@property(nonatomic, assign, readonly) CGSize idealSize;
 @property(nonatomic, strong, readonly) UIImage *thumbnail;
 @property(nonatomic, strong, readonly) PDFPage *pdfPage;
 @property(nonatomic, assign) CGFloat rotation;

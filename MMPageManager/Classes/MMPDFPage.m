@@ -7,6 +7,10 @@
 //
 
 #import "MMPDFPage.h"
+#import "MMPDFDocument.h"
+#import "MMPDFDocument+Private.h"
+
+NSString *const MMPDFPageDidGenerateThumbnail = @"MMPDFPageDidGenerateThumbnail";
 
 
 @implementation MMPDFPage {
@@ -14,12 +18,14 @@
     UIImage *_thumbnail;
 }
 
-- (instancetype)initWithPDFPage:(PDFPage *)pdfPage
+- (instancetype)initWithPDFPage:(PDFPage *)pdfPage document:(MMPDFDocument *)document
 {
     NSAssert(pdfPage != nil, @"Must have valid page");
 
     if (self = [super init]) {
         _pdfPage = pdfPage;
+        _document = document;
+        _pageIndex = [[document pdfDocument] indexForPage:pdfPage];
 
         // convert to radians
         _rotation = [pdfPage rotation] * M_PI / 180.0;
@@ -62,7 +68,19 @@
 - (UIImage *)thumbnail
 {
     if (!_thumbnail) {
-        _thumbnail = [[self pdfPage] thumbnailOfSize:CGSizeMake(300, 300) forBox:kPDFDisplayBoxMediaBox];
+        typeof(self) __weak weakSelf = self;
+
+        [[[self document] pdfQueue] addOperationWithBlock:^{
+            MMPDFPage *strongSelf = weakSelf;
+
+            if (!strongSelf->_thumbnail) {
+                strongSelf->_thumbnail = [[strongSelf pdfPage] thumbnailOfSize:CGSizeMake(300, 300) forBox:kPDFDisplayBoxMediaBox];
+            }
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:MMPDFPageDidGenerateThumbnail object:strongSelf];
+            });
+        }];
     }
     return _thumbnail;
 }
