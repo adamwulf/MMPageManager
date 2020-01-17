@@ -84,7 +84,17 @@ NSString *const MMPDFPageDidGenerateThumbnailNotification = @"MMPDFPageDidGenera
 
         [[self document] doWhileOpen:^{
             if (!strongSelf->_thumbnail) {
-                strongSelf->_thumbnail = [[strongSelf pdfPage] thumbnailOfSize:CGSizeMake(300, 300) forBox:kPDFDisplayBoxMediaBox];
+                UIImage *thumb = [[strongSelf pdfPage] thumbnailOfSize:CGSizeMake(300, 300) forBox:kPDFDisplayBoxMediaBox];
+
+                if ([[self pdfPage] rotation] % 360 == 90) {
+                    thumb = [UIImage imageWithCGImage:[thumb CGImage] scale:[thumb scale] orientation:UIImageOrientationLeft];
+                } else if ([[self pdfPage] rotation] % 360 == 180) {
+                    thumb = [UIImage imageWithCGImage:[thumb CGImage] scale:[thumb scale] orientation:UIImageOrientationDown];
+                } else if ([[self pdfPage] rotation] % 360 == 270) {
+                    thumb = [UIImage imageWithCGImage:[thumb CGImage] scale:[thumb scale] orientation:UIImageOrientationRight];
+                }
+
+                strongSelf->_thumbnail = thumb;
             }
         }];
 
