@@ -104,4 +104,33 @@ NSString *const MMPDFPageDidGenerateThumbnailNotification = @"MMPDFPageDidGenera
     }];
 }
 
+- (void)renderInContext:(CGContextRef)context
+{
+    [self renderInContext:context ignoreRotation:NO];
+}
+
+- (void)renderInContext:(CGContextRef)context ignoreRotation:(BOOL)ignoreRotation
+{
+    CGContextSaveGState(context);
+
+    CGFloat theta = [[self pdfPage] rotation] % 360;
+    CGSize idealSize = [self idealSize];
+    CGSize preSize = [self idealSize];
+
+    if (theta == 90 || theta == 270) {
+        preSize = CGSizeMake(preSize.height, preSize.width);
+    }
+
+    if (ignoreRotation) {
+        // Ignore the PDF page's defined rotation, and render it as portrait
+        CGContextTranslateCTM(context, idealSize.width / 2, idealSize.height / 2);
+        CGContextRotateCTM(context, theta * M_PI / 180.0);
+        CGContextTranslateCTM(context, -preSize.width / 2, -preSize.height / 2);
+    }
+
+    [[self pdfPage] drawWithBox:kPDFDisplayBoxMediaBox toContext:context];
+
+    CGContextRestoreGState(context);
+}
+
 @end

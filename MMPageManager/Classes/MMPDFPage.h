@@ -29,6 +29,9 @@ extern NSString *const MMPDFPageDidGenerateThumbnailNotification;
 @property(nonatomic, strong, readonly) PDFPage *pdfPage;
 @property(nonatomic, assign) CGFloat rotation;
 
+- (void)renderInContext:(CGContextRef)context;
+- (void)renderInContext:(CGContextRef)context ignoreRotation:(BOOL)ignoreRotation;
+
 @end
 
 NS_ASSUME_NONNULL_END
