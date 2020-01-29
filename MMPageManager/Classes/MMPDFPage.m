@@ -55,6 +55,12 @@ NSString *const MMPDFPageDidGenerateThumbnailNotification = @"MMPDFPageDidGenera
 
 - (void)setRotation:(CGFloat)rotation
 {
+    while (rotation >= 2 * M_PI) {
+        rotation -= 2 * M_PI;
+    }
+    while (rotation <= -2 * M_PI) {
+        rotation += 2 * M_PI;
+    }
     _rotation = rotation;
 
     [[self pdfPage] setRotation:rotation * 180.0 / M_PI];
