@@ -90,14 +90,16 @@ NSString *const MMPDFPageDidGenerateThumbnailNotification = @"MMPDFPageDidGenera
 
         [[self document] doWhileOpen:^{
             if (!strongSelf->_thumbnail) {
-                UIImage *thumb = [[strongSelf pdfPage] thumbnailOfSize:CGSizeMake(300, 300) forBox:kPDFDisplayBoxMediaBox];
+                CGFloat scale = [[UIScreen mainScreen] scale];
+                CGFloat dim = 300 * scale;
+                UIImage *thumb = [[strongSelf pdfPage] thumbnailOfSize:CGSizeMake(dim, dim) forBox:kPDFDisplayBoxMediaBox];
 
                 if ([[self pdfPage] rotation] % 360 == 90) {
-                    thumb = [UIImage imageWithCGImage:[thumb CGImage] scale:[thumb scale] orientation:UIImageOrientationLeft];
+                    thumb = [UIImage imageWithCGImage:[thumb CGImage] scale:scale orientation:UIImageOrientationLeft];
                 } else if ([[self pdfPage] rotation] % 360 == 180) {
-                    thumb = [UIImage imageWithCGImage:[thumb CGImage] scale:[thumb scale] orientation:UIImageOrientationDown];
+                    thumb = [UIImage imageWithCGImage:[thumb CGImage] scale:scale orientation:UIImageOrientationDown];
                 } else if ([[self pdfPage] rotation] % 360 == 270) {
-                    thumb = [UIImage imageWithCGImage:[thumb CGImage] scale:[thumb scale] orientation:UIImageOrientationRight];
+                    thumb = [UIImage imageWithCGImage:[thumb CGImage] scale:scale orientation:UIImageOrientationRight];
                 }
 
                 strongSelf->_thumbnail = thumb;
